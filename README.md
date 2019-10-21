@@ -12,7 +12,40 @@ $ npm install signed-url
 
 ## API
 
-TODO
+### Create a signer
+
+```js
+const config = {
+  secret: 'my secret', // used to sign and verify everything *required*
+  key: 'hash' // the query string key to use (defaults to 'hash')
+};
+const signer = require('signed-url')(config);
+```
+
+### Sign a URL
+
+```js
+const options = {
+  method: 'GET', // request method (defaults to 'GET')
+  ttl: 3600 // expiry time in seconds (optional)
+};
+const signedUrl = signer.sign(url, options);
+```
+
+### Verify a URL
+
+```js
+const options = {
+  method: 'GET' // request method to validate
+};
+const valid = signer.verify(signedUrl, options);
+```
+
+### Verify with an Express middleware
+
+```js
+app.use(signer.verifyMiddleware);
+```
 
 ## License
 
