@@ -24,7 +24,7 @@
     "url": "https://github.com/noblesamurai/node-signed-url/issues"
   },
   "engines": {
-    "node": "10.x",
+    "node": "^10 || ^12",
     "npm": "6.x"
   },
   "dependencies": {
