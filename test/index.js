@@ -44,6 +44,14 @@ describe('index', function () {
     expect(signer.verify(signed, { method: 'get' })).to.be.false();
   });
 
+  it('should ignore excluded query params', function () {
+    const url = 'https://www.example.com/test?a=1&b=2';
+    const signed = new URL(signer.sign(url, { method: 'put', ttl: 600 }));
+    signed.searchParams.set('c', 'blerg');
+    signed.searchParams.set('d', 'things');
+    expect(signer.verify(signed.href, { method: 'put', exclude: ['c', 'd'] })).to.be.true();
+  });
+
   it('should validate a request', function () {
     const next = sinon.stub();
     const req = {
