@@ -13,9 +13,10 @@ class SignedUrl {
   }
 
   hash (url, options = {}) {
-    const { method = 'GET', expire } = options;
+    const { method = 'GET', exclude = [], expire } = options;
     const u = new URL(url);
     u.searchParams.delete(this.key);
+    exclude.forEach(p => u.searchParams.delete(p));
     u.searchParams.sort();
     const contents = [method.toUpperCase(), formatUrl(u), expire].filter(Boolean).join(':');
     const hash = createHmac('sha256', this.secret).update(contents).digest('base64');
