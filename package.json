@@ -1,7 +1,7 @@
 {
   "name": "signed-url",
   "description": "library for signing and validating urls",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Andrew Harris <andrew@noblesamurai.com>",
   "license": "BSD",
   "main": "src/index.js",
