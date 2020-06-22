@@ -1,6 +1,5 @@
 const abind = require('abind');
 const createError = require('http-errors');
-const ow = require('ow');
 const { createHmac } = require('crypto');
 const { URL, format: formatUrl } = require('url');
 const { urlsafe, i2b, b2i } = require('./utils');
