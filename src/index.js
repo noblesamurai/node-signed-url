@@ -33,6 +33,7 @@ class SignedUrl {
   verify (url, options = {}) {
     const u = new URL(url);
     const hash = u.searchParams.get(this.key);
+    if (!hash) return false;
     const [, exp] = hash.split('.');
     const expire = exp && b2i(exp);
     const expired = expire && expire < Date.now() / 1000;

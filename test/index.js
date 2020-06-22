@@ -26,6 +26,11 @@ describe('index', function () {
     expect(signer.verify(signed, { method: 'get' })).to.be.true();
   });
 
+  it('should return false if URL contains no hash', function () {
+    const url = 'https://www.example.com/test?a=1&b=2';
+    expect(signer.verify(url, { method: 'get' })).to.be.false();
+  });
+
   it('should not verify if the signature is invalid', function () {
     const url = 'https://www.example.com/test?a=1&b=2&hash=fubar';
     expect(signer.verify(url, { method: 'get' })).to.be.false();
