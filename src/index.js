@@ -1,5 +1,6 @@
 const abind = require('abind');
 const createError = require('http-errors');
+const ow = require('ow');
 const { createHmac } = require('crypto');
 const { URL, format: formatUrl } = require('url');
 const { urlsafe, i2b, b2i } = require('./utils');
@@ -33,6 +34,7 @@ class SignedUrl {
   verify (url, options = {}) {
     const u = new URL(url);
     const hash = u.searchParams.get(this.key);
+    if (!ow.isValid(hash, ow.string.nonEmpty)) return false;
     const [, exp] = hash.split('.');
     const expire = exp && b2i(exp);
     const expired = expire && expire < Date.now() / 1000;
