@@ -29,8 +29,7 @@
   },
   "dependencies": {
     "abind": "^1.0.5",
-    "http-errors": "^1.7.3",
-    "ow": "^0.17.0"
+    "http-errors": "^1.7.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
