@@ -1,8 +1,9 @@
 language: node_js
 before_install: "! grep PLEASE_FILL_IN_HERE README.md"
 node_js:
-  - '10'
-  - '12'
+  - 10
+  - 12
+  - 14
 # For the code coverage stuff to work, set your CC_TEST_REPORTER_ID env var.
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
