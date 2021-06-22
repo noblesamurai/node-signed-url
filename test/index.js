@@ -1,6 +1,9 @@
 const expect = require('chai').expect;
-const sinon = require('sinon');
 const signer = require('..')({ secret: 'hidden' });
+const sinon = require('sinon');
+
+// Hash for https://www.example.com/test?a=1&b=2 with secret 'hidden'
+const hash = 'JmMQHFOrXqbqDAgKQyfX7rFJElQiglvwDyVnQtCbTmk.MTU3MDcxMTUwMQ';
 
 describe('index', function () {
   let clock;
@@ -17,7 +20,7 @@ describe('index', function () {
   it('should sign a url', function () {
     const url = 'https://www.example.com/test?a=1&b=2';
     const signed = signer.sign(url, { method: 'get', ttl: 600 });
-    expect(signed).to.equal('https://www.example.com/test?a=1&b=2&hash=***REMOVED***.MTU3MDcxMTUwMQ');
+    expect(signed).to.equal(`https://www.example.com/test?a=1&b=2&hash=${hash}`);
   });
 
   it('should verify a signed url', function () {
@@ -54,7 +57,7 @@ describe('index', function () {
     const req = {
       protocol: 'https',
       get: () => 'www.example.com',
-      originalUrl: '/test?a=1&b=2&hash=***REMOVED***.MTU3MDcxMTUwMQ',
+      originalUrl: `/test?a=1&b=2&hash=${hash}`,
       method: 'GET'
     };
     const middleware = signer.verifyMiddleware;
