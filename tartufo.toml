@@ -1,0 +1,13 @@
+[tool.tartufo]
+cleanup = true
+entropy = true
+exclude-path-patterns = [
+  'tartufo.toml'
+]
+exclude-signatures = [
+  # Test signature for https://www.example.com/test?a=1&b=2 with secret 'hidden'
+  "afd5ede36b8cf24fe5df15ed4184a5d0c0397de0ef6e815192665b5370022641"
+]
+json = false
+regex = true
+repo-path = "."
