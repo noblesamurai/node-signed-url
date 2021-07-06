@@ -1,0 +1,33 @@
+name: 🧪 Lint, Test & Check Coverage 🧐
+
+on: [push]
+
+jobs:
+  build:
+    name: Test the build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10, 12, 14]
+
+    steps:
+    - uses: "actions/checkout@v2"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Setup NodeJS ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install packages
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        echo //registry.npmjs.org/:_authToken=$NPM_TOKEN >> .npmrc
+        npm install
+    - name: Lint, Test & Coverage
+      uses: paambaati/codeclimate-action@v2.7.5
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      with:
+        coverageCommand: npm run coverage
