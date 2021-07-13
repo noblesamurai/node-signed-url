@@ -47,6 +47,20 @@ const valid = signer.verify(signedUrl, options);
 app.use(signer.verifyMiddleware);
 ```
 
+## Contributing
+
+### Prerequisites
+
+```
+$ pip install pre-commit
+```
+
+### Installation
+
+```
+$ pre-commit install --install-hooks
+```
+
 ## License
 
 The BSD License
